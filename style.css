@@ -4,6 +4,7 @@ body {
     height: 100%;
     margin: 0;
 }
+
 .mainDiv {
     width: 100%;
     height: 100%;
@@ -12,6 +13,16 @@ body {
     align-items: center;
 }
 
+.calculator {
+    height: 500px;
+    width: 320px;
+    border: 1px solid black;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
 
 .calcDisplay {
     height: 100px;
@@ -23,25 +34,29 @@ body {
 }
 
 .calculatorDispMain {
+    width: 300px;
     display: flex;
     justify-content: end;
     align-items: center;
 }
 
 .resultDispMain {
+    width: 300px;
     display: flex;
     justify-content: end;
     align-items: center;
 }
 
 .calcButtons {
-    height: 350px;
+    height: 370px;
     width: 300px;
     border: 1px solid black;
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
 }
 
 .calcButtons button {
