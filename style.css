@@ -110,7 +110,7 @@ button:hover {
 }
 
 #clearAll:hover {
-    background-color: #B0936C;
+    background-color: #DF6749;
 }
 
 #clearOne {
@@ -118,7 +118,7 @@ button:hover {
 }
 
 #clearOne:hover {
-    background-color: #B0936C;
+    background-color: #DF6749;
 }
 
 
@@ -129,11 +129,18 @@ button:hover {
     background-color: #6FD890;
 }
 
+#plus:hover {
+    background-color: #42B366;
+}
+
 #minus {
     grid-column: 4/5;
     grid-row: 2/3;
     background-color: #6FD890;
+}
 
+#minus:hover {
+    background-color: #42B366;
 }
 
 #multi {
@@ -142,10 +149,22 @@ button:hover {
     background-color: #6FD890;
 }
 
+#multi:hover {
+    background-color: #42B366;
+}
+
 #div {
     background-color: #6FD890;
 }
 
+#div:hover {
+    background-color: #42B366;
+}
+
 #power {
     background-color: #6FD890;
+}
+
+#power:hover {
+    background-color: #42B366;
 }
