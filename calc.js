@@ -1,84 +1,106 @@
 let a = 0,
     b = 0,
     operator = "",
-    flagResDisp =  true;
+    flagResDisp = true, //This is to refresh the result display for the second number
+    flagFirstRun = true, //Checks if it's the first calculation
+    allowEqual = true;
 
 const calculatorDisp = document.querySelector(".calculatorDisp");
 const resultDisp = document.querySelector(".resultDisp");
 
 
 const clearAll = document.querySelector(".clearAll");
-clearAll.addEventListener('click', () => {
+clearAll.addEventListener('click', resetAll());
+
+function resetAll() {
+    a = 0;
+    b = 0;
     resultDisp.textContent = "";
-})
+    calculatorDisp.textContent = "";
+    operator = "";
+    flagResDisp = true;
+    flagFirstRun = true;
+    allowEqual = true;
+}
+
 
 const numbersPressed = document.querySelectorAll(".number");
 numbersPressed.forEach(numberPressed => {
     numberPressed.addEventListener('click', () => {
-        if(flagResDisp == false) {
-            resultDisp.textContent = "";
-        }
-        flagResDisp = true;
-        resultDisp.textContent += String(numberPressed.textContent);
-    })
+        getValueNumber(numberPressed.textContent)
+    });
 });
+
+function getValueNumber() { //This prints the number on result display
+    if (flagResDisp == false) {
+        resultDisp.textContent = "";
+        allowEqual = true;
+        flagResDisp = true;
+        noRepeatEqual();
+    }
+    resultDisp.textContent += String(arguments[0]);
+}
+
 
 const operatorsPressed = document.querySelectorAll(".operator");
 operatorsPressed.forEach(operatorPressed => {
     operatorPressed.addEventListener('click', () => {
-        operator = String(operatorPressed.textContent);
-
-        b = Number(resultDisp.textContent);
-        calculatorDisp.textContent += resultDisp.textContent+" "+operator+" ";
-        a = operate(operator, a, b);
-        resultDisp.textContent = a;
-        flagResDisp = false;
+        getValueOperator(operatorPressed.textContent);
     })
 });
 
+function getValueOperator() { //Gets the operator value and gets the second value
+    operator = String(arguments[0]);
+    b = Number(resultDisp.textContent);
+    calculatorDisp.textContent += resultDisp.textContent + " " + operator + " ";
+    if (!flagFirstRun) {
+        a = operate(operator, a, b);
+        resultDisp.textContent = a;
+    } else {
+        a = b;
+    }
+    flagResDisp = false;
+    flagFirstRun = false;
+}
+
 
 const equalPressed = document.querySelector(".calculate");
-equalPressed.addEventListener('click', () => {
+
+function noRepeatEqual() { //This function makes sure that the equal symbol can't be pressed more than once
+    if (allowEqual) {
+        equalPressed.addEventListener('click', callingEqual);
+    } else {
+        equalPressed.removeEventListener('click', callingEqual);
+    }
+}
+
+function callingEqual() {
     b = Number(resultDisp.textContent);
-    calculatorDisp.textContent += resultDisp.textContent+" ";
+    calculatorDisp.textContent += resultDisp.textContent + " ";
     resultDisp.textContent = operate(operator, a, b);
     a = Number(resultDisp.textContent);
-})
-
-
-function add() {
-    return arguments[0] + arguments[1];
+    allowEqual = false;
+    noRepeatEqual();
 }
 
-function diff() {
-    return arguments[0] - arguments[1];
-}
 
-function mul() {
-    return arguments[0] * arguments[1];
-}
-
-function div() {
-    return arguments[0] / arguments[1];
-}
-
-function operate(operator, number1, number2) {
+function operate(operator, number1, number2) { //Performs basic mathmematic operations two given values
     let result = 0;
     switch (operator) {
         case '+':
-            result = add(number1, number2);
+            result = number1 + number2;
             break;
 
         case '-':
-            result = diff(number1, number2);
+            result = number1 - number2;
             break;
 
         case '*':
-            result = mul(number1, number2);
+            result = number1 * number2;
             break;
 
         case '/':
-            result = div(number1, number2);
+            result = number1 / number2;
             break;
     }
     return result;
