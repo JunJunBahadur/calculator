@@ -48,7 +48,7 @@ div {
 .calculatorDispMain {
     width: 300px;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     background-color: #706FA3;
 }
@@ -64,7 +64,7 @@ div {
 .resultDispMain {
     width: 300px;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     background-color: #7680AA;
 }
